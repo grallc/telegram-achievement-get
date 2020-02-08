@@ -1,0 +1,23 @@
+{
+  "name": "telegram-achievement-get",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grallc/telegram-achievement-get.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/grallc/telegram-achievement-get/issues"
+  },
+  "homepage": "https://github.com/grallc/telegram-achievement-get#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "node-telegram-bot-api": "^0.40.0"
+  }
+}
