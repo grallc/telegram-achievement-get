@@ -1,6 +1,8 @@
 process.env.NTBA_FIX_319 = 1
 
 const TelegramBot = require('node-telegram-bot-api')
+const Discord = require('discord.js')
+const client = new Discord.Client()
 
 const dotenv = require('dotenv')
 dotenv.config()
@@ -19,6 +21,24 @@ bot.onText(/\/ac/, async (msg, match) => {
   arguments.shift()
   const item = Math.floor(Math.random() * 10)
   let url = `https://minecraftskinstealer.com/achievement/${item}/Achievement+Get/`
-  arguments.forEach(argument => (url = `${url}${argument}+`))
-  bot.sendPhoto(chatId, url)
+  bot.sendPhoto(chatId, url + arguments.join('+'))
 })
+
+
+const discordTokens = process.env.DISCORD_TOKENS.split(',')
+if (discordTokens.length === 0) 
+  return
+
+client.on('message', msg => {
+  if (msg.content.toLowerCase().startsWith('/ac')) {
+    let args = msg.content.split(' ');
+    args.shift();
+    const item = Math.floor(Math.random() * 10)
+    let url = `https://minecraftskinstealer.com/achievement/${item}/Achievement+Get/`
+    const embed = new Discord.RichEmbed().setImage(url + args.join('+'))
+    msg.channel.send(embed)
+    msg.delete();
+  }
+});
+
+discordTokens.forEach(token => client.login(token))

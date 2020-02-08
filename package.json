@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/grallc/telegram-achievement-get#readme",
   "dependencies": {
+    "discord.js": "^11.5.1",
     "dotenv": "^8.2.0",
     "node-telegram-bot-api": "^0.40.0"
   }
