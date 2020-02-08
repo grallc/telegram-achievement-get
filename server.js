@@ -2,7 +2,6 @@ process.env.NTBA_FIX_319 = 1
 
 const TelegramBot = require('node-telegram-bot-api')
 const Discord = require('discord.js')
-const client = new Discord.Client()
 
 const dotenv = require('dotenv')
 dotenv.config()
@@ -13,23 +12,28 @@ if (!token) {
   throw new Error('Missing Telegram Token. Please provid a valid in .env file.')
 }
 
-const bot = new TelegramBot(token, { polling: true })
+// Initialize the Telegram Part
+const telegramBot = new TelegramBot(token, { polling: true })
 
-bot.onText(/\/ac/, async (msg, match) => {
+// Listen for messages that start with `/ac`
+telegramBot.onText(/\/ac/, async (msg, match) => {
   const chatId = msg.chat.id
-  const arguments = match.input.split(' ')
-  arguments.shift()
-  const item = Math.floor(Math.random() * 10)
+  
+  const arguments = match.input.split(' ') // Get arguments
+  arguments.shift() // Remove the first one (`/ac`)
+  const item = Math.floor(Math.random() * 10) // Generate a random integer
   let url = `https://minecraftskinstealer.com/achievement/${item}/Achievement+Get/`
-  bot.sendPhoto(chatId, url + arguments.join('+'))
+  telegramBot.sendPhoto(chatId, url + arguments.join('+')) // Send message
 })
 
 
+const discordBot = new Discord.Client()
 const discordTokens = process.env.DISCORD_TOKENS.split(',')
 if (discordTokens.length === 0) 
   return
 
-client.on('message', msg => {
+discordBot.on('message', msg => {
+    // Listen for messages that start with `/ac`
   if (msg.content.toLowerCase().startsWith('/ac')) {
     let args = msg.content.split(' ');
     args.shift();
@@ -41,4 +45,4 @@ client.on('message', msg => {
   }
 });
 
-discordTokens.forEach(token => client.login(token))
+discordTokens.forEach(token => discordBot.login(token))
