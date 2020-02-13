@@ -7,7 +7,6 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 const token = process.env.TELEGRAM_TOKEN
-const defaultChannel =
 
 if (!token) {
   throw new Error('Missing Telegram Token. Please provid a valid in .env file.')
