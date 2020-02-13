@@ -7,6 +7,7 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 const token = process.env.TELEGRAM_TOKEN
+const defaultChannel =
 
 if (!token) {
   throw new Error('Missing Telegram Token. Please provid a valid in .env file.')
@@ -18,7 +19,6 @@ const telegramBot = new TelegramBot(token, { polling: true })
 // Listen for messages that start with `/ac`
 telegramBot.onText(/\/ac/, async (msg, match) => {
   const chatId = msg.chat.id
-  
   const arguments = match.input.split(' ') // Get arguments
   arguments.shift() // Remove the first one (`/ac`)
   const item = Math.floor(Math.random() * 10) // Generate a random integer
@@ -35,13 +35,17 @@ if (discordTokens.length === 0)
 discordBot.on('message', msg => {
     // Listen for messages that start with `/ac`
   if (msg.content.toLowerCase().startsWith('/ac')) {
-    let args = msg.content.split(' ');
-    args.shift();
-    const item = Math.floor(Math.random() * 10)
-    let url = `https://minecraftskinstealer.com/achievement/${item}/Achievement+Get/`
-    const embed = new Discord.RichEmbed().setImage(url + args.join('+'))
-    msg.channel.send(embed)
-    msg.delete();
+    if(msg.author.id === '194178307288334336') {
+      msg.channel.send('ok boomer')
+    } else if (msg.author.id === '161157810086871040') {
+      let args = msg.content.split(' ');
+      args.shift();
+      const item = Math.floor(Math.random() * 10)
+      let url = `https://minecraftskinstealer.com/achievement/${item}/Achievement+Get/`
+      const embed = new Discord.RichEmbed().setImage(url + args.join('+'))
+      msg.channel.send(embed)
+      msg.delete();
+    }
   }
 });
 
