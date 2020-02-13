@@ -22,7 +22,7 @@ telegramBot.onText(/\/ac/, async (msg, match) => {
   arguments.shift() // Remove the first one (`/ac`)
   const item = Math.floor(Math.random() * 10) // Generate a random integer
   let url = `https://minecraftskinstealer.com/achievement/${item}/Achievement+Get/`
-  telegramBot.sendPhoto(chatId, url + arguments.join('+')) // Send message
+  telegramBot.sendPhoto(chatId, url + arguments.join('+')).catch(error => console.log(error.response.body)) // Send message
 })
 
 
